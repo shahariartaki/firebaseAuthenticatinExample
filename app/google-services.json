@@ -1,0 +1,174 @@
+{
+  "project_info": {
+    "project_number": "677655176897",
+    "firebase_url": "https://fir-example-f16bc.firebaseio.com",
+    "project_id": "fir-example-f16bc",
+    "storage_bucket": "fir-example-f16bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677655176897:android:5c645553415a7bfa",
+        "android_client_info": {
+          "package_name": "com.example.taki.a2991828batch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677655176897-l27cncb7rkgtdkm29geu4uv8uo4m40km.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-s4jpIJD1F--mXUwSz1gTz8KCuVheiw0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677655176897:android:78d4a07efee25416",
+        "android_client_info": {
+          "package_name": "com.example.taki.firebaseauthenticatinexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677655176897-km1f25p22vrdgfeh9aub60rip3gth39o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taki.firebaseauthenticatinexample",
+            "certificate_hash": "6a96e00c419f0dd1b5644ebc5181803398e1cd24"
+          }
+        },
+        {
+          "client_id": "677655176897-l27cncb7rkgtdkm29geu4uv8uo4m40km.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-s4jpIJD1F--mXUwSz1gTz8KCuVheiw0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677655176897-l27cncb7rkgtdkm29geu4uv8uo4m40km.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677655176897:android:8983c215a2c9c30f",
+        "android_client_info": {
+          "package_name": "com.example.taki.newfirebaseproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677655176897-5ceo0ligdkjirrj516jpq9eqmvk0p0ou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taki.newfirebaseproject",
+            "certificate_hash": "6a96e00c419f0dd1b5644ebc5181803398e1cd24"
+          }
+        },
+        {
+          "client_id": "677655176897-l27cncb7rkgtdkm29geu4uv8uo4m40km.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-s4jpIJD1F--mXUwSz1gTz8KCuVheiw0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677655176897-l27cncb7rkgtdkm29geu4uv8uo4m40km.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677655176897:android:462b79e6f48f9d1d",
+        "android_client_info": {
+          "package_name": "com.example.taki.studentdatabasewithfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677655176897-acbucgoh5bfbgr820p5b09r8mdslnhbd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taki.studentdatabasewithfirebase",
+            "certificate_hash": "6a96e00c419f0dd1b5644ebc5181803398e1cd24"
+          }
+        },
+        {
+          "client_id": "677655176897-l27cncb7rkgtdkm29geu4uv8uo4m40km.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-s4jpIJD1F--mXUwSz1gTz8KCuVheiw0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677655176897-l27cncb7rkgtdkm29geu4uv8uo4m40km.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
