@@ -56,4 +56,14 @@
         android:textColor="#000"
         android:text="do you have account? Singup"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="Forgetpassword"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:text="Forget Password?"/>
+
 </LinearLayout>

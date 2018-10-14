@@ -1,6 +1,8 @@
 package com.example.taki.firebaseauthenticatinexample;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,6 +11,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,10 +21,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -32,7 +38,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 
 public class ProfileActivity extends AppCompatActivity {
-    private TextView name, email;
+    private TextView name, email,varified;
     private EditText updatename;
     private ImageView photo;
     ImageButton enableBtn;
@@ -43,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
     private String downloadUri;
     private ProgressDialog dialog;
     private FirebaseUser firebaseUser;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,31 @@ public class ProfileActivity extends AppCompatActivity {
         initView();
         addListener();
         initVariable();
+        loadprofileInfo();
+    }
+    private void loadprofileInfo(){
+        firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+
+        if (firebaseUser.isEmailVerified()){
+            varified.setText("Varified");
+
+        }
+
+        else {
+            varified.setText("Not Varified");
+        }
+        if (firebaseUser!=null){
+
+            email.setText(firebaseUser.getEmail().toString());
+
+            if (firebaseUser.getDisplayName()!=null)
+            name.setText(firebaseUser.getDisplayName().toString());
+
+            if (firebaseUser.getPhotoUrl()!=null) {
+                String uri = firebaseUser.getPhotoUrl().toString();
+                Glide.with(this).load(uri).into(photo);
+            }
+        }
     }
 
     private void addListener() {
@@ -69,6 +101,21 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 name.setVisibility(View.GONE);
                 updatename.setVisibility(View.VISIBLE);
+            }
+        });
+        varified.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               new AlertDialog.Builder(ProfileActivity.this).
+                        setMessage("Verified? ").setCancelable(false)
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                firebaseUser.sendEmailVerification();
+                            }
+                        }).setNegativeButton("No",null).show();
+
+
             }
         });
 
@@ -99,6 +146,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void initView() {
         name = findViewById(R.id.username);
+        varified = findViewById(R.id.isVarivied);
         email = findViewById(R.id.userEmail);
         updatename = findViewById(R.id.usernameEdit);
         editBtn = findViewById(R.id.updateprofile);
@@ -111,6 +159,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void initVariable() {
         sReference = FirebaseStorage.getInstance().getReference("USER_PHOTO");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseAuth=FirebaseAuth.getInstance();
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             String UserEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail().toLowerCase();
@@ -175,5 +224,74 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId()==R.id.logOut){
+
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this,MainActivity.class));
+            finish();
+            return true;
+        }
+        if (item.getItemId()==R.id.Resetpass){
+            resetThePassword();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    private void resetThePassword(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view= getLayoutInflater().inflate(R.layout.resetpassword,null);
+
+        final EditText oldpass = view.findViewById(R.id.oldpass);
+        final EditText newpass = view.findViewById(R.id.newpass);
+        final EditText ConfirmNewpass = view.findViewById(R.id.ConfirmNewpass);
+        Button button=view.findViewById(R.id.ResetPassword);
+        builder.setView(view);
+        builder.show();
+        final AlertDialog dialog =builder.show();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String _email=firebaseUser.getEmail().toString();
+                String _oldpass=oldpass.getText().toString().trim();
+                final String _newpass=newpass.getText().toString().trim();
+                String _confirm=ConfirmNewpass.getText().toString().trim();
+
+                if (!_newpass.equals(_confirm)){
+                    ConfirmNewpass.setError("Password not Match");
+                    ConfirmNewpass.requestFocus();
+                    return;
+                }
+                firebaseAuth.signInWithEmailAndPassword(_email,_oldpass)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()){
+                                    firebaseUser.updatePassword(_newpass)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()){
+                                                        Toast.makeText(ProfileActivity.this, "Password updated", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    dialog.dismiss();
+                                                }
+                                            });
+                                }
+                            }
+                        });
+            }
+        });
+
+    }
 }

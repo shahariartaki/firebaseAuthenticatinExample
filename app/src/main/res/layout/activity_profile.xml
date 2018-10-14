@@ -79,5 +79,16 @@
         android:textColor="#000"
         android:textStyle="bold"/>
 
+    <TextView
+        android:id="@+id/isVarivied"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Not Varified"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
 
 </LinearLayout>
